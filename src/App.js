@@ -1,12 +1,17 @@
 import React from 'react';
-import styles from './App.module.css';
-import publications from './path/to/publications.json';
-import Reader from './Components/Reader/Reader';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const App = () => (
-  <div className={styles.App}>
-    <Reader items={publications} />
-  </div>
-);
+import styles from './App.module.css';
+import Dashboard from './Components/Dashboard/Dashboard';
+
+const App = () => {
+  return (
+    <div className={styles.App}>
+      <ToastContainer />
+      <Dashboard />
+    </div>
+  );
+};
 
 export default App;

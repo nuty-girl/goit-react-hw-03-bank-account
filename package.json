@@ -1,5 +1,5 @@
 {
-  "name": "hw-02-bank-account",
+  "name": "hw-03-bank-account",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +19,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://nuty-girl.github.io/goit-react-hw-02-bank-account",
+  "homepage": "https://nuty-girl.github.io/goit-react-hw-03-bank-account",
   "eslintConfig": {
     "extends": "react-app"
   },

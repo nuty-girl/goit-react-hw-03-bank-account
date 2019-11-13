@@ -1,35 +1,59 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import T from 'prop-types';
 import styles from './Controls.module.css';
 
-const Controls = ({
-  onDecrement,
-  onIncrement,
-  indexPublication,
-  publicationQuantity,
-}) => (
-  <section className={styles.controls}>
-    {indexPublication > 1 && (
-      <button type="button" className={styles.button} onClick={onDecrement}>
-        Назад
-      </button>
-    )}
-    {indexPublication < publicationQuantity && (
-      <button type="button" className={styles.button} onClick={onIncrement}>
-        Вперед
-      </button>
-    )}
-  </section>
-);
+export default class Controls extends Component {
+  static propTypes = {
+    onDeposit: T.func.isRequired,
+    onWithdraw: T.func.isRequired,
+  };
 
-Controls.propTypes = {
-  onDecrement: PropTypes.func.isRequired,
-  onIncrement: PropTypes.func.isRequired,
-  indexPublication: PropTypes.number.isRequired,
-  publicationQuantity: PropTypes.number.isRequired,
-};
+  static defaultProps = {};
 
-export default Controls;
+  state = {
+    inputValue: '',
+  };
 
-/* prevState < this.props.items.lenght &&
- */
+  getInputValue = e => {
+    const amount = Number(e.currentTarget.value);
+    this.setState({
+      inputValue: amount,
+    });
+  };
+
+  handleDeposit = () => {
+    this.props.onDeposit(this.state.inputValue);
+    this.reset();
+  };
+
+  handleWithdraw = () => {
+    this.props.onWithdraw(this.state.inputValue);
+    this.reset();
+  };
+
+  reset = () => {
+    this.setState({
+      inputValue: '',
+    });
+  };
+
+  render() {
+    const { inputValue } = this.state;
+    return (
+      <section className={styles.controls}>
+        <input
+          type="number"
+          name="amount"
+          value={inputValue}
+          onChange={this.getInputValue}
+        />
+        <button type="button" onClick={this.handleDeposit}>
+          Deposit
+        </button>
+        <button type="button" onClick={this.handleWithdraw}>
+          Withdraw
+        </button>
+      </section>
+    );
+  }
+}
