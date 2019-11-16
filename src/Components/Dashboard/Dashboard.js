@@ -82,13 +82,16 @@ export default class Dashboard extends Component {
     } else if (amount < 0) {
       this.notifyNegativeNumber();
     } else if (amount > 0) {
-      this.setState(state => ({
-        transactions: [...state.transactions, transaction],
-      }));
-
       this.setState(prevState => ({
+        transactions: [...prevState.transactions, transaction],
         balance: Number(prevState.balance) + Number(amount),
       }));
+      // this.setState(prevState => ({
+      //   balance: prevState.balance + amount,
+      // }));
+      // this.setState(state => ({
+      //   transactions: [...state.transactions, transaction],
+      // }));
     }
   };
 
@@ -107,10 +110,8 @@ export default class Dashboard extends Component {
       this.notifyNegativeNumber();
     } else if (amount > 0 && amount <= this.state.balance) {
       this.setState(prevState => ({
+        transactions: [...prevState.transactions, transaction],
         balance: prevState.balance - amount,
-      }));
-      this.setState(state => ({
-        transactions: [...state.transactions, transaction],
       }));
     }
   };
